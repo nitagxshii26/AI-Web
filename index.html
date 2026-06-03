@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the age of AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>Welcome to the age of AI</h1>
+  </header>
+
+  <main>
+    <section class="section" id="what-is-ai">
+      <h2>What is AI?</h2>
+      <p class="text">Artificial Intelligence (AI) is the field of computer science that teaches machines to simulate intelligent behavior. It includes machine learning, natural language processing, computer vision, and more.</p>
+    </section>
+
+    <section class="section" id="how-ai-works">
+      <h2>How AI works</h2>
+      <p class="text">AI systems learn from data using algorithms that identify patterns. Below is a visual representation of the learning loop.</p>
+      <div class="visual">
+        <img src="ai-learn.svg" alt="AI learning diagram" style="width:100%;height:auto;">
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <h2>Learn more</h2>
+      <ul>
+        <li><a href="https://www.coursera.org/specializations/ai" target="_blank">Coursera - AI Specialization</a></li>
+        <li><a href="https://www.edx.org/course/artificial-intelligence-ai" target="_blank">edX - AI Course</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/azure/cognitive-services/" target="_blank">Microsoft Learn: AI & Cognitive Services</a></li>
+        <li><a href="https://www.khanacademy.org/partner-content/chist" target="_blank">Khan Academy - Intro to Artificial Intelligence</a></li>
+        <li><a href="https://www.youtube.com/playlist?list=PLMCXo6QJwS4Gse17AJSn_Tp1emq2uMqy4" target="_blank">YouTube: AI for Beginners (Free Playlist)</a></li>
+      </ul>
+    </section>
+
+    <section class="section" id="history-of-ai">
+      <h2>History of AI</h2>
+      <p>Artificial Intelligence has evolved since the 1950s, from puzzle solving programs to deep learning models that listen, write, and even drive vehicles.</p>
+    </section>
+
+    <section class="section" id="types-of-ai">
+      <h2>Types of AI</h2>
+      <p>AI generally falls into three categories:</p>
+      <ul>
+        <li>Artificial Narrow Intelligence (ANI) – AI designed for a single task.</li>
+        <li>Artificial General Intelligence (AGI) – hypothetically possessing the ability to do any intellectual task a human can.</li>
+        <li>Artificial Super Intelligence (ASI) – a future, surpassingly super intelligent system.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="ai-in-life">
+      <h2>AI in Everyday Life</h2>
+      <ul>
+        <li>Smart assistants like Siri and Alexa help with daily tasks.</li>
+        <li>Recommendation engines suggest movies, music, and products based on your preferences.</li>
+        <li>Navigation apps use AI for real‑time traffic updates.</li>
+        <li>Healthcare apps detect diseases in medical images more accurately than humans.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="myths-facts">
+      <h2>AI Myths & Facts</h2>
+      <p><strong>Myth:</strong> AI can fully replace human creativity.</p>
+      <p><strong>Fact:</strong> While AI can produce content, the originality and context still come from human guidance.</p>
+      <p><strong>Myth:</strong> More data always means better AI.</p>
+      <p><strong>Fact:</strong> The quality and diversity of data matter far more.</p>
+    </section>
+
+    <section class="section" id="try-ai-projects">
+      <h2>AI Projects You Can Try</h2>
+      <ul>
+        <li>Build a simple image classifier with TensorFlow.js or Keras.</li>
+        <li>Create a chatbot that answers questions about a hobby or a book.</li>
+        <li>Generate a piece of music using a generative model like Magenta.</li>
+        <li>Build a sentiment analyzer for tweets.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="fun-facts">
+      <h2>Fun AI Facts</h2>
+      <ul>
+        <li>The 2016 chess‑winning model AlphaZero beats the world champion in only a few hours of training.</li>
+        <li>Deep‑fake videos are becoming so realistic that regulators are drafting laws to prohibit them.</li>
+        <li>AI-generated artworks have sold for millions of dollars at auction.</li>
+        <li>Machine learning is used to predict the melting of ice sheets and help fight climate change.</li>
+      </ul>
+      </section>
+<section class="section" id="ask-ai-anything">
+  <h2>Ask AI Anything</h2>
+  <div class="ask-ai">
+    <textarea id="aiQuestion" rows="4" placeholder="Type your AI question here..."></textarea>
+    <button id="getAnswerBtn">Get Answer</button>
+  </div>
+  <div id="answerBox" class="answer-box">Thinking...</div>
+  <script>
+document.getElementById('getAnswerBtn').addEventListener('click', async () => {
+  const question = document.getElementById('aiQuestion').value.trim();
+  const answerBox = document.getElementById('answerBox');
+  if (!question) { answerBox.textContent = 'Please enter a question.'; return; }
+  answerBox.textContent = 'Thinking...';
+  try {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer sk-or-v1-d9fb2c2e96da9505db6e712ng...'
+      },
+      body: JSON.stringify({
+        model: '~openai/gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant that answers questions about AI.' },
+          { role: 'user', content: question }
+        ],
+        stream: false
+      })
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      answerBox.textContent = 'Error: ' + err;
+      return;
+    }
+    const data = await res.json();
+    const reply = data?.choices?.[0]?.message?.content || 'No answer found.';
+    answerBox.textContent = reply;
+  } catch (err) {
+    answerBox.textContent = 'Error: ' + err.message;
+  }
+});
+</script>
+</section>
+</main>
+
+  <footer class="footer">
+    <p>&copy; 2026 AI Learning Hub. All rights reserved.</p>
+  </footer>
+</body>
+</html>
