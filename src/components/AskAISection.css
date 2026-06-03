@@ -1,0 +1,10 @@
+#ask-ai {
+  background: linear-gradient(to right, #f0f, #0ff);
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 2px rgba(0,0,0,.15);
+  margin-bottom: 20px;
+}
