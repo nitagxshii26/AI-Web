@@ -1,6 +1,4 @@
-// vercel.json
 {
-  "outputDirectory": "build",   // path to the directory Vercel should publish
   "buildCommand": "npm run build",
   "installCommand": "npm ci",
   "framework": null
