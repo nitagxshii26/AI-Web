@@ -1,14 +1,14 @@
-// # server.js
-// # -------------------------------------------------------------------
-// # Express based proxy to forward requests to OpenRouter. It reads the API key from .env and uses CORS so that your front‑end can hit the same origin.
-// # -------------------------------------------------------------------
-require('dotenv').config({ path: './.gitignore/.env' });
+// server.js
+// Legacy local proxy – kept for local dev but is *not* used by Vercel.
+// Exported only to support `npm start` locally.
+
+const { config } = require('dotenv');
+config({ path: './.gitignore/.env' });
+
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
 const app = express();
-
-// Allow cross‑origin requests from the dev‑server (e.g., Vite, Next.js)
 app.use(cors());
 app.use(express.json());
 
@@ -23,9 +23,9 @@ app.post('/ask-ai', async (req, res) => {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
-          model: 'gpt-4o-mini',
-          messages: [{ role: 'user', content: prompt }],
-          max_tokens: 500
+        model: 'gpt-4o-mini',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 500
       })
     });
     if (!response.ok) {
@@ -41,5 +41,5 @@ app.post('/ask-ai', async (req, res) => {
 });
 
 app.listen(process.env.PORT || 4000, () => {
-  console.log(`AI proxy listening on port ${process.env.PORT ? process.env.PORT : 4000}`);
+  console.log(`AI proxy listening on port ${process.env.PORT || 4000}`);
 });

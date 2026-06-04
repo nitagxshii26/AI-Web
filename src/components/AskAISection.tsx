@@ -1,3 +1,6 @@
+// src/components/AskAISection.tsx
+// Updated component uses /api/ask-ai Vercel function.
+
 import React, { useState } from 'react';
 import './AskAISection.css';
 
@@ -21,7 +24,7 @@ const AskAISection: React.FC = () => {
       if (!res.ok) {
         setError(`Error ${res.status}: ${data.error?.message || 'unknown'}`);
       } else {
-        const txt = data.choices?.[0]?.message?.content || '(No answer)';
+        const txt = data.choices?.[0]?.message?.content ?? '(No answer)';
         setAnswer(txt);
       }
     } catch (err) {

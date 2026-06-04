@@ -1,0 +1,6 @@
+// .vercelignore
+# Ignore local node_modules and build artifacts so Vercel only sees project files
+node_modules/
+build/
+public/
+*.env
