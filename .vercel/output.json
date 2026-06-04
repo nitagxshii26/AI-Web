@@ -1,0 +1,24 @@
+# .vercel/output.json
+{
+  "version": 1,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "src/**.tsx",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/ask-ai",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src\pages\index.html"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
-# server.js
-# -------------------------------------------------------------------
-# Express based proxy to forward requests to OpenRouter. It reads the API key from .env and uses CORS so that your front‑end can hit the same origin.
-# -------------------------------------------------------------------
-require('dotenv').config();
+// # server.js
+// # -------------------------------------------------------------------
+// # Express based proxy to forward requests to OpenRouter. It reads the API key from .env and uses CORS so that your front‑end can hit the same origin.
+// # -------------------------------------------------------------------
+require('dotenv').config({ path: './.gitignore/.env' });
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
