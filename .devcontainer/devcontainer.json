@@ -1,0 +1,12 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "AI-Web Development Container",
+  "dockerFile": "Dockerfile",
+  "settings": {
+    "editor.formatOnSave": true
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}

@@ -1,5 +1,5 @@
 // src/components/AskAISection.tsx
-// Updated component uses /api/ask-ai Vercel function.
+// Updated component uses /api/ask‑ai Vercel function.
 
 import React, { useState } from 'react';
 import './AskAISection.css';
