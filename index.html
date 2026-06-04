@@ -102,20 +102,10 @@ document.getElementById('getAnswerBtn').addEventListener('click', async () => {
   if (!question) { answerBox.textContent = 'Please enter a question.'; return; }
   answerBox.textContent = 'Thinking...';
   try {
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const res = await fetch('/api/ask-ai', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer sk-or-v1-d9fb2c2e96da9505db6e712ng...'
-      },
-      body: JSON.stringify({
-        model: '~openai/gpt-4o-mini',
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant that answers questions about AI.' },
-          { role: 'user', content: question }
-        ],
-        stream: false
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: question })
     });
     if (!res.ok) {
       const err = await res.text();

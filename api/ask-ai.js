@@ -1,8 +1,6 @@
 // api/ask-ai.js
 // Updated to work directly as a Vercel serverless function.
 
-const fetch = require('node-fetch');
-
 module.exports = async (req, res) => {
   const { prompt } = req.body;
   if (!prompt) {
@@ -11,7 +9,7 @@ module.exports = async (req, res) => {
 
   try {
     const response = await fetch(
-      'https://api.openrouter.ai/api/v1/chat/completions',
+      'https://openrouter.ai/api/v1/chat/completions',
       {
         method: 'POST',
         headers: {
@@ -19,8 +17,11 @@ module.exports = async (req, res) => {
           'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4o-mini',
-          messages: [{ role: 'user', content: prompt }],
+          model: 'openai/gpt-4o-mini',
+          messages: [
+            { role: 'system', content: 'You are a helpful assistant that answers questions about AI.' },
+            { role: 'user', content: prompt }
+          ],
           max_tokens: 500,
         }),
       }
