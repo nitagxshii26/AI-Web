@@ -12,7 +12,7 @@ const AskAISection: React.FC = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/ask-ai', {
+      const res = await fetch('/api/ask-ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: question })
